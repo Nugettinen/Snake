@@ -22,8 +22,7 @@
 
     <script>
         // ===== GAME SETUP =====
-        const canvas =
-            document.getElementById("gameCanvas");
+        const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
         const gridSize = 20;
         const tileCount = canvas.width / gridSize;
@@ -32,6 +31,7 @@
         let gameOver = false;
         let nextDirection = { x: 1, y: 0 };
         let directionLocked = false;
+        let gameInterval;
 
         // ===== INITIAL STATE =====
         let snake = [
@@ -84,6 +84,13 @@
         //
         // ===================================
 
+        const startGame = () => {
+            clearInterval(gameInterval);
+            gameInterval = setInterval(() => {
+                moveSnake();
+                drawGame();
+            }, 300);
+        };
 
         const moveSnake = () => {
             direction = nextDirection;
@@ -164,16 +171,11 @@
             directionLocked = false;
             placeFood();
             drawGame();
-            gameInterval = setInterval(() => {
-                moveSnake();
-                drawGame();
-            }, 300);
+            startGame();
         });
-        gameInterval = setInterval(() => {
-            moveSnake();
-            drawGame();
-        }, 300);
-        
+
+        startGame();
+    
     </script>
 
 </body>
