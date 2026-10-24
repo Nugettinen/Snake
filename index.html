@@ -32,6 +32,8 @@
         let nextDirection = { x: 1, y: 0 };
         let directionLocked = false;
         let gameInterval;
+        let gameSpeed = 300;
+
 
         // ===== INITIAL STATE =====
         let snake = [
@@ -89,7 +91,7 @@
             gameInterval = setInterval(() => {
                 moveSnake();
                 drawGame();
-            }, 300);
+            }, gameSpeed);
         };
 
         const moveSnake = () => {
@@ -119,7 +121,12 @@
             if (head.x === food.x && head.y === food.y) {
                 score++;
                 scor.textContent = "Score: " + score;
+                gameSpeed -= 20;
+                if (gameSpeed < 80) {
+                    gameSpeed = 80;
+                }
                 placeFood();
+                startGame();
             } else {
                 snake.pop();
             }
@@ -169,6 +176,7 @@
             info.textContent = "";
             nextDirection = { x: 1, y: 0 };
             directionLocked = false;
+            gameSpeed = 300;
             placeFood();
             drawGame();
             startGame();
