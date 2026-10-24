@@ -30,6 +30,8 @@
         const scor = document.getElementById("scor");
         const info = document.getElementById("info");
         let gameOver = false;
+        let nextDirection = { x: 1, y: 0 };
+        let directionLocked = false;
 
         // ===== INITIAL STATE =====
         let snake = [
@@ -84,6 +86,8 @@
 
 
         const moveSnake = () => {
+            direction = nextDirection;
+            directionLocked = false;
             const head = { 
                 x: snake[0].x + direction.x, 
                 y: snake[0].y + direction.y };
@@ -129,17 +133,21 @@
         };
         
         window.addEventListener("keydown", (e) => {
-            if (gameOver) {
+            if (gameOver || directionLocked) {
                 return;
             }
             if (e.key === "ArrowUp" && direction.y === 0) {
-                direction = { x: 0, y: -1 };
+                nextDirection = { x: 0, y: -1 };
+                directionLocked = true;
             } else if (e.key === "ArrowDown" && direction.y === 0) {
-                direction = { x: 0, y: 1 };
+                nextDirection = { x: 0, y: 1 };
+                directionLocked = true;
             } else if (e.key === "ArrowLeft" && direction.x === 0) {
-                direction = { x: -1, y: 0 };
+                nextDirection = { x: -1, y: 0 };
+                directionLocked = true;
             } else if (e.key === "ArrowRight" && direction.x === 0) {
-                direction = { x: 1, y: 0 };
+                nextDirection = { x: 1, y: 0 };
+                directionLocked = true;
             }
         });
         document.getElementById("restartButton").addEventListener("click", () => {
@@ -152,6 +160,8 @@
             score = 0;
             scor.textContent = "Score: " + score;
             info.textContent = "";
+            nextDirection = { x: 1, y: 0 };
+            directionLocked = false;
             placeFood();
             drawGame();
             gameInterval = setInterval(() => {
