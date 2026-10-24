@@ -89,6 +89,13 @@
                 snake.pop();
             }
         };
+
+        const placeFood = () => {
+            food = {
+                x: Math.floor(Math.random() * tileCount),
+                y: Math.floor(Math.random() * tileCount)
+            };
+        };
         
         window.addEventListener("keydown", (e) => {
             if (e.key === "ArrowUp" && direction.y === 0) {
@@ -104,7 +111,7 @@
         gameInterval = setInterval(() => {
             moveSnake();
             drawGame();
-        }, 200);
+        }, 300);
         
     </script>
 
