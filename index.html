@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <h1>Snake</h1>
+    <h1>Snake-peli</h1>
     <canvas id="gameCanvas" width="400"
             height="400"></canvas>
     <p id="info"></p>
@@ -91,14 +91,14 @@
                 head.y >= tileCount) {
                     clearInterval(gameInterval);
                     gameOver = true;
-                    alert("Game Over! Your score: " + score);
+                    info.textContent = "Game Over! Your score: " + score;
                     return;
             }
             for (const segment of snake) {
                 if (head.x === segment.x && head.y === segment.y) {
                     clearInterval(gameInterval);
                     gameOver = true;
-                    alert("Game Over! Your score: " + score);
+                    info.textContent = "Game Over! Your score: " + score;
                     return;
                 }
             }
