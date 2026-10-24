@@ -13,7 +13,8 @@
 </head>
 <body>
 
-    <h1>Snake-peli</h1>
+    <h1>Snake-game</h1>
+    <p id="scor"></p>
     <canvas id="gameCanvas" width="400"
             height="400"></canvas>
     <p id="info"></p>
@@ -26,6 +27,7 @@
         const ctx = canvas.getContext("2d");
         const gridSize = 20;
         const tileCount = canvas.width / gridSize;
+        const scor = document.getElementById("scor");
         const info = document.getElementById("info");
         let gameOver = false;
 
@@ -40,7 +42,7 @@
         let score = 0;
 
         // ===== DRAWING =====
-        info.textContent = "Score: " + score;
+        scor.textContent = "Score: " + score;
         const drawGame = () => {
             ctx.clearRect(0, 0,
                 canvas.width, canvas.height);
@@ -105,7 +107,7 @@
             snake.unshift(head);
             if (head.x === food.x && head.y === food.y) {
                 score++;
-                info.textContent = "Score: " + score;
+                scor.textContent = "Score: " + score;
                 placeFood();
             } else {
                 snake.pop();
@@ -148,7 +150,8 @@
                     { x: 8, y: 10 }];
             direction = { x: 1, y: 0 };
             score = 0;
-            info.textContent = "Score: " + score;
+            scor.textContent = "Score: " + score;
+            info.textContent = "";
             placeFood();
             drawGame();
             gameInterval = setInterval(() => {
