@@ -89,6 +89,13 @@
                     alert("Game Over! Your score: " + score);
                     return;
             }
+            for (const segment of snake) {
+                if (head.x === segment.x && head.y === segment.y) {
+                    clearInterval(gameInterval);
+                    alert("Game Over! Your score: " + score);
+                    return;
+                }
+            }
             snake.unshift(head);
             if (head.x === food.x && head.y === food.y) {
                 score++;
